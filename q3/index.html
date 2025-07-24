@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>דיווח על תיבה מדברת</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>טופס דיווח על תיבה מדברת</h1>
+  <form id="reportForm">
+    <label>מזהה תיבה: <input type="text" id="boxId" required></label>
+    <label>צבע התיבה: <input type="text" id="color"></label>
+    <label>תלונות חוזרות מצד התיבה <input type="text" id="complaints"></label>
+
+    <label>מצב מערכתי נוכחי:
+      <select id="situation">
+        <option value="">בחר מצב</option>
+        <option value="פעילה">פעילה</option>
+        <option value="מצב תלונה">מצב תלונה</option>
+        <option value="נרדמת">נרדמת</option>
+        <option value="לא משתפת פעולה">לא משתפת פעולה</option>
+        <option value="חופרת">חופרת</option>
+       <option value="לא פעילה">לא פעילה</option>
+      </select>
+    </label>
+    <label>כמות דואר: <input type="number" id="mailAmount" min="0"></label>
+    <label>טון דיבור:
+      <select id="tone">
+        <option value="">בחר טון</option>
+        <option value="כועס">כועס</option>
+        <option value="עדין">עדין</option>
+        <option value="ביישן">ביישן</option>
+      </select>
+    </label>
+    <label>סוג משתמש:
+      <select id="userType">
+        <option value="">בחר סוג משתמש</option>
+        <option value="אדם">אדם</option>
+        <option value="חיה">חיה</option>
+        <option value="חייזר">חייזר</option>
+      </select>
+    </label>
+    <label>אימייל לדיווח חוזר: <input type="email" id="email" required></label>
+    <button type="submit">שלח דיווח</button>
+  </form>
+
+<div id="messages" role="alert" aria-live="polite"></div>
+  <div id="complaintsList"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
