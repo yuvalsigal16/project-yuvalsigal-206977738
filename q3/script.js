@@ -48,19 +48,32 @@ function renderItems() {
         <div class="field"><strong>אימייל:</strong> ${safe(item.email)}</div>
         <div class="field"><strong>תאריך שליחה:</strong> ${new Date(item.timestamp).toLocaleString()}</div>
       </div>
-      <div class="status">סטטוס: ${safe(item.status)}</div>
-      <div>
-        <button class="btn-status" data-index="${index}">שנה סטטוס</button>
-        <button class="btn-delete" data-index="${index}">מחיקה</button>
-      </div>
-    `;
-
+        <div class="status">סטטוס: ${safe(item.status)}</div>
+       <div>
+        <button class="btn-status" data-id="${item.timestamp}">שנה סטטוס</button>
+       <button class="btn-delete" data-id="${item.timestamp}">מחיקה</button>
+     </div> `;
     container.appendChild(div);
   });
 }
 
-function deleteItem(index) {
+function findComplaintIndexById(id) {
+  return complaints.findIndex(item => item.timestamp === id);
+}
+
+function deleteItemById(id) {
+  const index = findComplaintIndexById(id);
+  if (index === -1) return;
   complaints.splice(index, 1);
+  saveItems();
+  renderItems();
+}
+
+function toggleStatusById(id) {
+  const index = findComplaintIndexById(id);
+  if (index === -1) return;
+  complaints[index].status =
+    complaints[index].status === "תיבה רגועה" ? "דורשת טיפול" : "תיבה רגועה";
   saveItems();
   renderItems();
 }
@@ -68,14 +81,6 @@ function deleteItem(index) {
 function updateItem(index, newStatus) {
   if (!complaints[index]) return;
   complaints[index].status = newStatus;
-  saveItems();
-  renderItems();
-}
-
-function toggleStatus(index) {
-  if (!complaints[index]) return;
-  complaints[index].status =
-    complaints[index].status === "תיבה רגועה" ? "דורשת טיפול" : "תיבה רגועה";
   saveItems();
   renderItems();
 }
@@ -151,15 +156,19 @@ window.addEventListener("load", () => {
       sortSelect.addEventListener("change", renderItems);
     }
 
-    document.addEventListener("click", (e) => {
-      if (e.target.classList.contains("btn-status")) {
-        const index = parseInt(e.target.getAttribute("data-index"), 10);
-        toggleStatus(index);
-      }
-      if (e.target.classList.contains("btn-delete")) {
-        const index = parseInt(e.target.getAttribute("data-index"), 10);
-        deleteItem(index);
-      }
-    });
+    
+document.addEventListener("click", (e) => {
+  const id = parseInt(e.target.getAttribute("data-id"), 10);
+  if (!id) return;
+
+  if (e.target.classList.contains("btn-status")) {
+    toggleStatusById(id);
+  }
+
+  if (e.target.classList.contains("btn-delete")) {
+    deleteItemById(id);
+  }
+});
+
   }
 });
