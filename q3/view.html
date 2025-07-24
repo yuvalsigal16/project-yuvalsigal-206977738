@@ -12,9 +12,22 @@
 
     <label for="sortOrder">מיון לפי:</label>
     <select id="sortOrder">
-      <option value="desc">מהחדש לישן</option>
-      <option value="asc">מהישן לחדש</option>
-    </select>
+  <option value="desc">מהחדש לישן</option>
+  <option value="asc">מהישן לחדש</option>
+</select>
+
+<div id="filters" style="margin: 20px 0;">
+  <label for="filterUserType">סנן לפי סוג משתמש:</label>
+  <select id="filterUserType">
+    <option value="">הצג הכל</option>
+    <option value="אדם">אדם</option>
+    <option value="חיה">חיה</option>
+    <option value="חייזר">חייזר</option>
+  </select>
+
+    <label for="minMailAmount">כמות דואר מינימלית:</label>
+    <input type="number" id="minMailAmount" min="0" style="width: 80px;">
+    </div>
         <div id="complaintsList"></div>
        <button onclick="location.href='index.html'">
         חזור לטופס דיווח

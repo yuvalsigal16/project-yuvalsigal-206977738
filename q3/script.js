@@ -29,30 +29,44 @@ function renderItems() {
   const sortSelect = document.getElementById("sortOrder");
   const sortOrder = sortSelect ? sortSelect.value : "desc";
 
+  const userTypeFilter = document.getElementById("filterUserType")?.value || "";
+  const minMailAmount = parseInt(document.getElementById("minMailAmount")?.value, 10);
+
   const sorted = [...complaints].sort((a, b) => {
     return sortOrder === "asc" ? a.timestamp - b.timestamp : b.timestamp - a.timestamp;
   });
 
-  sorted.forEach((item, index) => {
+  const filtered = sorted.filter(item => {
+    const matchUser = !userTypeFilter || item.userType === userTypeFilter;
+    const matchMail = isNaN(minMailAmount) || (item.mailAmount !== null && item.mailAmount >= minMailAmount);
+    return matchUser && matchMail;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = "<p style='text-align:center'>אין תלונות שתואמות לסינון</p>";
+    return;
+  }
+
+  filtered.forEach((item) => {
     const div = document.createElement("div");
     div.className = "complaint";
 
     div.innerHTML = `
     <div class="fields">
-    <div class="field"><span class="label">מזהה:</span> ${safe(item.boxId)}</div>
-    <div class="field"><span class="label">תלונה:</span> ${safe(item.complaints)}</div>
-    <div class="field"><span class="label">מצב:</span> ${safe(item.situation)}</div>
-    <div class="field"><span class="label">כמות דואר:</span> ${safe(item.mailAmount)}</div>
-    <div class="field"><span class="label">טון:</span> ${safe(item.tone)}</div>
-    <div class="field"><span class="label">משתמש:</span> ${safe(item.userType)}</div>
-    <div class="field"><span class="label">אימייל:</span> ${safe(item.email)}</div>
-    <div class="field"><span class="label">תאריך שליחה:</span> ${new Date(item.timestamp).toLocaleString()}</div>
+      <div class="field"><span class="label">מזהה:</span> ${safe(item.boxId)}</div>
+      <div class="field"><span class="label">תלונה:</span> ${safe(item.complaints)}</div>
+      <div class="field"><span class="label">מצב:</span> ${safe(item.situation)}</div>
+      <div class="field"><span class="label">כמות דואר:</span> ${safe(item.mailAmount)}</div>
+      <div class="field"><span class="label">טון:</span> ${safe(item.tone)}</div>
+      <div class="field"><span class="label">משתמש:</span> ${safe(item.userType)}</div>
+      <div class="field"><span class="label">אימייל:</span> ${safe(item.email)}</div>
+      <div class="field"><span class="label">תאריך שליחה:</span> ${new Date(item.timestamp).toLocaleString()}</div>
     </div>
     <div class="status">סטטוס: ${safe(item.status)}</div>
     <div>
-    <button class="btn-status" data-id="${item.timestamp}">שנה סטטוס</button>
-    <button class="btn-delete" data-id="${item.timestamp}">מחיקה</button>
-   </div>`;
+      <button class="btn-status" data-id="${item.timestamp}">שנה סטטוס</button>
+      <button class="btn-delete" data-id="${item.timestamp}">מחיקה</button>
+    </div>`;
 
     container.appendChild(div);
   });
@@ -157,19 +171,28 @@ window.addEventListener("load", () => {
       sortSelect.addEventListener("change", renderItems);
     }
 
-    
-document.addEventListener("click", (e) => {
-  const id = parseInt(e.target.getAttribute("data-id"), 10);
-  if (!id) return;
+    const userTypeFilter = document.getElementById("filterUserType");
+    const minMailAmountInput = document.getElementById("minMailAmount");
 
-  if (e.target.classList.contains("btn-status")) {
-    toggleStatusById(id);
-  }
+    if (userTypeFilter) {
+      userTypeFilter.addEventListener("change", renderItems);
+    }
 
-  if (e.target.classList.contains("btn-delete")) {
-    deleteItemById(id);
-  }
-});
+    if (minMailAmountInput) {
+      minMailAmountInput.addEventListener("input", renderItems);
+    }
 
+    document.addEventListener("click", (e) => {
+      const id = parseInt(e.target.getAttribute("data-id"), 10);
+      if (!id) return;
+
+      if (e.target.classList.contains("btn-status")) {
+        toggleStatusById(id);
+      }
+
+      if (e.target.classList.contains("btn-delete")) {
+        deleteItemById(id);
+      }
+    });
   }
 });
