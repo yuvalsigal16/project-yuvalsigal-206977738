@@ -38,21 +38,22 @@ function renderItems() {
     div.className = "complaint";
 
     div.innerHTML = `
-      <div class="fields">
-        <div class="field"><strong>מזהה:</strong> ${safe(item.boxId)}</div>
-        <div class="field"><strong>תלונה:</strong> ${safe(item.complaints)}</div>
-        <div class="field"><strong>מצב:</strong> ${safe(item.situation)}</div>
-        <div class="field"><strong>כמות דואר:</strong> ${safe(item.mailAmount)}</div>
-        <div class="field"><strong>טון:</strong> ${safe(item.tone)}</div>
-        <div class="field"><strong>משתמש:</strong> ${safe(item.userType)}</div>
-        <div class="field"><strong>אימייל:</strong> ${safe(item.email)}</div>
-        <div class="field"><strong>תאריך שליחה:</strong> ${new Date(item.timestamp).toLocaleString()}</div>
-      </div>
-        <div class="status">סטטוס: ${safe(item.status)}</div>
-       <div>
-        <button class="btn-status" data-id="${item.timestamp}">שנה סטטוס</button>
-       <button class="btn-delete" data-id="${item.timestamp}">מחיקה</button>
-     </div> `;
+    <div class="fields">
+    <div class="field"><span class="label">מזהה:</span> ${safe(item.boxId)}</div>
+    <div class="field"><span class="label">תלונה:</span> ${safe(item.complaints)}</div>
+    <div class="field"><span class="label">מצב:</span> ${safe(item.situation)}</div>
+    <div class="field"><span class="label">כמות דואר:</span> ${safe(item.mailAmount)}</div>
+    <div class="field"><span class="label">טון:</span> ${safe(item.tone)}</div>
+    <div class="field"><span class="label">משתמש:</span> ${safe(item.userType)}</div>
+    <div class="field"><span class="label">אימייל:</span> ${safe(item.email)}</div>
+    <div class="field"><span class="label">תאריך שליחה:</span> ${new Date(item.timestamp).toLocaleString()}</div>
+    </div>
+    <div class="status">סטטוס: ${safe(item.status)}</div>
+    <div>
+    <button class="btn-status" data-id="${item.timestamp}">שנה סטטוס</button>
+    <button class="btn-delete" data-id="${item.timestamp}">מחיקה</button>
+   </div>`;
+
     container.appendChild(div);
   });
 }
