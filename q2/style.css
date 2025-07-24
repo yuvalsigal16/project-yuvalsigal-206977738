@@ -31,7 +31,7 @@ header h1 {
 .package {
   position: relative; 
   background-color: wheat;
-  border: 2px solid #ccc; 
+  border: 2px solid white; 
   border-radius: 8px;
   width: 280px;
   padding: 3px;
@@ -70,6 +70,11 @@ li {
   border-radius: 50px;
   font-weight: bold;
   box-shadow: 0 0 5px black;}
+
+  .color-card{
+  background-color: #ffe0f0; 
+  transition: all 0.3s ease-in-out;
+  z-index: 2;  }
 
 #broadcast-btn {
   background-color: gainsboro;
