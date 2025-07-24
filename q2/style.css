@@ -1,0 +1,119 @@
+.packages-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px;
+  flex-wrap: wrap;}
+  
+header h1 {
+  margin-bottom: 20px;
+  text-align: center;}
+
+.telepathy-support {
+  position: fixed;
+  top: 100px;
+  right: 10px;
+  width: 100px;
+  background-color: whitesmoke;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 5px;
+  box-shadow: 0 0 6px black;
+  font-size: 14px;
+  color: black;
+  z-index: 100;}
+
+.package {
+  background-color: wheat;
+  border: 2px solid #ccc; 
+  border-radius: 8px;
+  box-shadow: 0 0 8px black;
+  width: 280px;
+  padding: 3px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease;}
+
+.package:hover {
+  transform: translateY(-5px);
+  border-color: plum;}
+
+.package ul {
+  list-style: none;
+  margin: 2px 0;
+  padding: 0;}
+
+li {
+  list-style: none;
+  margin: 2px 0;
+  padding: 3px;}
+
+.package .price {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 1px;
+  color: purple;}
+
+.package .label {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background-color: red;
+  color: white;
+  padding: 6px 10px;
+  font-size: 14p;
+  border-radius: 50px;
+  font-weight: bold;
+  box-shadow: 0 0 5px black;}
+
+#broadcast-btn {
+  background-color: gainsboro;
+  color: black;
+  border: 2px solid black;
+  padding: 5px 15px;
+  font-size: 14px;
+  border-radius: 30px;
+  box-shadow: 0 0 6px black;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px; 
+}
+
+#broadcast-btn:hover {
+  background-color: gray;
+}
+.package img {
+  width: 100%;               
+  max-height: 160px;         
+  object-fit: cover;         
+  border-radius: 8px;         
+  margin-bottom: 2px;        
+}
+
+@media screen and (max-width: 767px) {
+  .packages-container {
+    flex-direction: column;
+    align-items: center;}
+
+  .package {
+    width: 90%;}
+
+ .telepathy-support {
+    position: fixed;
+    top: 100px;
+    right: 10px;
+    width: 100px;
+    background-color: whitesmoke;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0 0 6px black;
+    font-size: 12px;
+    color: black;
+   z-index: 100;}
+ }
